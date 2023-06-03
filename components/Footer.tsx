@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
           <div>{`© ${new Date().getFullYear()}`}</div>
           <div>{` • `}</div>
-          <Link href="/">HAN|博客</Link>
+          <Link href="/"><a>HAN|博客</a></Link>
         </div>
       </div>
     </footer>

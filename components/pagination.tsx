@@ -19,7 +19,7 @@ export default function Pagination({ totalPages, currentPage }: Props) {
         )}
         {prevPage && (
           <Link href={currentPage - 1 === 1 ? `/articles/` : `/articles/page/${currentPage - 1}`}>
-            <button>上一页</button>
+            <button><a>上一页</a></button>
           </Link>
         )}
         <span>
@@ -32,7 +32,7 @@ export default function Pagination({ totalPages, currentPage }: Props) {
         )}
         {nextPage && (
           <Link href={`/articles/page/${currentPage + 1}`}>
-            <button>下一页</button>
+            <button><a>下一页</a></button>
           </Link>
         )}
       </nav>

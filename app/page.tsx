@@ -1,5 +1,4 @@
 'use client'
-import 'aplayer/dist/APlayer.min.css'
 import { useCallback, useEffect, useState } from 'react'
 import Particles from 'react-particles'
 import {loadFull} from 'tsparticles'

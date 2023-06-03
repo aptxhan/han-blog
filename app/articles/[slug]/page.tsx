@@ -19,11 +19,11 @@ export default async function Post({params}:{params:{slug:string}}) {
           {postData.matterResult.data.title}
         </h1>
         <div className='items-center'>
-          <Link href='articles'>返回文档列表</Link>
+          <Link href='articles'><a>返回文档列表</a></Link>
         </div>
         <div dangerouslySetInnerHTML={{__html: postData.contentHtml}}></div>
         <div className='items-center'>
-          <Link href='articles'>返回文档列表</Link>
+          <Link href='articles'><a>返回文档列表</a></Link>
         </div>
       </div>
     </div>

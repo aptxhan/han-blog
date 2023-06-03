@@ -1,18 +1,22 @@
 import Article from '@/components/article'
 import Pagination from '@/components/pagination'
-import { getAllPostIds ,getPostData} from '@/lib/post'
+import { getAllPostIds ,getArticleData} from '@/lib/post'
 
 export default async function Page() {
   
   const posts = await getAllPostIds()
   const totalPages = Math.ceil(posts.length/5)
   const currentPosts = posts.slice(0, 5)
-  const currentSummarys = new Map()
+    //当前summary
+    const currentSummarys = new Map()
+    //当前title
+    const currentTitles = new Map()
   
   for(let i = 0; i < currentPosts.length; i++){
     const slug = decodeURI(currentPosts[i].slug)
-    const postData = await getPostData(slug)
+    const postData = await getArticleData(slug)
     currentSummarys.set(slug, postData.matterResult.data.summary)
+    currentTitles.set(slug, postData.matterResult.data.title)
   }
 
   return (
@@ -47,7 +51,9 @@ export default async function Page() {
       </div>
       <ul>
         {currentPosts.map((post) => {
-          return <Article key={post.slug} slug={post.slug} summary={currentSummarys.get(decodeURI(post.slug))}/>
+          return <Article key={post.slug} slug={post.slug} 
+          summary={currentSummarys.get(decodeURI(post.slug))}
+          title={currentTitles.get(decodeURI(post.slug))}/>
         })}
       </ul>
     </div>

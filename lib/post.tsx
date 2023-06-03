@@ -61,6 +61,17 @@ const contentHtml = processedContent.toString();
   };
 }
 
+export async function  getArticleData(slug:string) {
+  const fullPath = path.join(postsDirectory, `${slug}.md`);
+  const fileContents = fs.readFileSync(fullPath, 'utf8');
+
+  // Use gray-matter to parse the post metadata section
+  const matterResult = matter(fileContents);
+  return {
+    matterResult
+  }
+}
+
 export async function getAboutData() {
   const fullPath = path.join(path.join(process.cwd(), 'data'), `about.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');

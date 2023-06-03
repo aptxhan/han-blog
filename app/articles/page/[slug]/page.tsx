@@ -1,6 +1,6 @@
 import Article from '@/components/article'
 import Pagination from '@/components/pagination'
-import { getAllPostIds, getPostData } from '@/lib/post'
+import { getAllPostIds, getArticleData } from '@/lib/post'
 
 export default async function Page({params}:{params:{slug:string}}) {
   
@@ -10,13 +10,18 @@ export default async function Page({params}:{params:{slug:string}}) {
   const currentIndex = (currentPage - 1) * 5
   
   const currentPosts = posts.slice(currentIndex, currentIndex + 5)
+  //当前summary
   const currentSummarys = new Map()
-  
+  //当前title
+  const currentTitles = new Map()
+
   for(let i = 0; i < currentPosts.length; i++){
     const slug = decodeURI(currentPosts[i].slug)
-    const postData = await getPostData(slug)
+    const postData = await getArticleData(slug)
     currentSummarys.set(slug, postData.matterResult.data.summary)
+    currentTitles.set(slug, postData.matterResult.data.title)
   }
+
   return (
     <>
     <div className="divide-y">
@@ -49,7 +54,9 @@ export default async function Page({params}:{params:{slug:string}}) {
       </div>
       <ul>
         {currentPosts.map((post) => {
-          return <Article key={post.slug} slug={post.slug} summary={currentSummarys.get(decodeURI(post.slug))}/>
+          return <Article key={post.slug} slug={post.slug} 
+          summary={currentSummarys.get(decodeURI(post.slug))}
+          title={currentTitles.get(decodeURI(post.slug))}/>
         })}
       </ul>
     </div>

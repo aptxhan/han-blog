@@ -1,10 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
-import { getPostData } from '@/lib/post'
 
-export default function Article({slug, summary}:{slug:string, summary: string}){
+export default function Article({slug, summary, title}:{slug:string, summary: string, title:string}){
   slug = decodeURI(slug)
-  const postData = getPostData(slug)
   return (
     <li key={slug} className="py-12">
       <article>
@@ -14,7 +12,7 @@ export default function Article({slug, summary}:{slug:string, summary: string}){
               <div>
                 <h2 className="text-2xl font-bold leading-8 tracking-tight">
                   <Link href={`/articles/${slug}`} className="text-gray-900 dark:text-gray-100">
-                    {slug}
+                    {title}
                   </Link>
                 </h2>
               </div>
@@ -27,7 +25,7 @@ export default function Article({slug, summary}:{slug:string, summary: string}){
                 href={`/articles/${slug}`}
                 className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
               >
-                查看更多 &rarr;
+                <a>查看更多</a>&rarr;
               </Link>
             </div>
           </div>
